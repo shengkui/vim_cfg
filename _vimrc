@@ -21,6 +21,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'junegunn/vim-pseudocl'
 Plugin 'junegunn/vim-oblique'
 Plugin 'chrisbra/csv.vim'
+Plugin 'will133/vim-dirdiff'
 call vundle#end()
 filetype plugin indent on
 endif
