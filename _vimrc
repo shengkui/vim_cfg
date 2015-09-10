@@ -67,7 +67,7 @@ set tabstop=4       "Number of spaces that a <Tab> in the file counts for.
 set softtabstop=4   "Number of spaces that a <Tab> counts for while editing.
 set shiftwidth=4    "Number of spaces to be used for each step of (auto)indent.
 set smarttab        "When hitting <Tab> or <Backspace> in front of line, 'shiftwidth' used.
-set expandtab       "No real tabs(insert spaces when <Tab> pressed).
+"set expandtab      "No real tabs(insert spaces when <Tab> pressed).
 set autoindent
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
