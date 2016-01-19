@@ -63,7 +63,7 @@ set wildmenu
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "TAB
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set tabstop=4       "Number of spaces that a <Tab> in the file counts for.
+set tabstop=4       "Number of spaces that a <Tab> counts for.
 set softtabstop=4   "Number of spaces that a <Tab> counts for while editing.
 set shiftwidth=4    "Number of spaces to be used for each step of (auto)indent.
 set smarttab        "When hitting <Tab> or <Backspace> in front of line, 'shiftwidth' used.
@@ -83,7 +83,7 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "paste mode
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set pastetoggle=<F2>
+"set pastetoggle=<F2>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "NERDTree
@@ -94,11 +94,9 @@ map <F3> :NERDTreeToggle<CR>
 "tabpage
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 :map <F4> :tabnew<CR>
-:map <F5> :tabprevious<CR>
-:map <F6> :tabnext<CR>
+:map <F5> :tabnext<CR>
 :imap <F4> <ESC>:tabnew<CR>i
-:imap <F5> <ESC>:tabprevious<CR>i
-:imap <F6> <ESC>:tabnext<CR>i
+:imap <F5> <ESC>:tabnext<CR>i
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "persistent-undo
