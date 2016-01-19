@@ -56,8 +56,10 @@ if [ $? -ne 0 ];then
     echo "ERROR"
     exit 1
 fi
+rm -rf $BACKUP_DIR
 
 echo
 echo "done."
+echo "The vim config has been packed into $ROOT_DIR/vim_cfg_vundle_`date +%Y%m%d`.tgz"
 echo
 exit 0
