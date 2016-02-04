@@ -20,9 +20,9 @@ Plugin 'majutsushi/tagbar'
 Plugin 'scrooloose/nerdtree'
 Plugin 'junegunn/vim-pseudocl'
 Plugin 'junegunn/vim-oblique'
-Plugin 'chrisbra/csv.vim'
 Plugin 'will133/vim-dirdiff'
 Plugin 'rking/ag.vim'
+"Plugin 'chrisbra/csv.vim'
 call vundle#end()
 filetype plugin indent on
 endif
@@ -133,7 +133,7 @@ inoremap <expr><C-p> pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "csv
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:csv_autocmd_arrange = 1
+"let g:csv_autocmd_arrange = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "ctags
@@ -144,8 +144,16 @@ map <C-F12> :!ctags -R --languages=c,c++,asm --fields=+iaS --extra=+q .<CR><CR>
 "Set ctags search path
 set tags=tags,../tags,../../tags,../../../tags
 
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"markdown
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"preview
+nmap <leader>m : !markdown_py % \| lynx -stdin <CR><CR>
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Status line
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set statusline=[%F][%{&ff}]%r%m%*%=[Line:%l/%L,Column:%c][%p%%]
-set laststatus=2            "Always show the status linea
+set laststatus=2            "Always show the status line
