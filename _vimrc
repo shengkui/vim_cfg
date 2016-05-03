@@ -102,7 +102,7 @@ map <F3> :NERDTreeToggle<CR>
 "persistent-undo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if v:version >= 703
-    set undofile                    "Save undos after file closes
+    set undofile                    "Save undos after file closed
     set undodir=$HOME/.vim/undo     "Where to save undo histories
     "set undolevels=1000            "How many undos
     "set undoreload=10000           "Number of lines to save for undo
@@ -115,6 +115,7 @@ endif
 "Tagbar
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <F8> :TagbarToggle<CR>
+let g:tagbar_sort = 0
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "neocomplcache
