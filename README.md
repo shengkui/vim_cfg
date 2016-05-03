@@ -1,6 +1,7 @@
 VIM config file
 ===============
 
-This is the VIM config file for me.
-And there is also a backup script for the VIM config.
+_vimrc: the VIM config file
+
+vim_cfg_backup.sh: a backup script for the VIM config.
 
