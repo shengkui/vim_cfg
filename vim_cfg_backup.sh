@@ -51,7 +51,7 @@ popd > /dev/null
 popd > /dev/null
 
 echo "Create package ..."
-tar zcf vim_cfg_vundle_`date +%Y%m%d`.tgz $VIM_CFG
+tar zcf vim_cfg_`date +%Y%m%d`.tgz $VIM_CFG
 if [ $? -ne 0 ];then
     echo "ERROR"
     exit 1
@@ -60,6 +60,6 @@ rm -rf $BACKUP_DIR
 
 echo
 echo "done."
-echo "The vim config has been packed into $ROOT_DIR/vim_cfg_vundle_`date +%Y%m%d`.tgz"
+echo "The vim config has been packed into $ROOT_DIR/vim_cfg_`date +%Y%m%d`.tgz"
 echo
 exit 0
