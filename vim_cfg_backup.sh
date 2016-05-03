@@ -1,5 +1,6 @@
 #!/bin/bash
 # Package all config file of VIM.
+set -u
 
 ROOT_DIR="$HOME"
 VIM_CFG="vim_cfg"
@@ -7,13 +8,14 @@ BACKUP_DIR="$ROOT_DIR/$VIM_CFG"
 VUNDLE_DIR="$BACKUP_DIR/.vim/bundle"
 UNDO_DIR="$BACKUP_DIR/.vim/undo"
 VUNDLE_PLUGIN="Vundle.vim"
+TGZ_FILE="vim_cfg_`date +%Y%m%d`.tgz"
 
 #Jump to home
 cd "$ROOT_DIR" || { echo "CD $ROOT_DIR error"; exit 1; }
 
 #----------------------------------------------
 echo "Create $VIM_CFG directory ..."
-mkdir -p $BACKUP_DIR || { echo "Create $BACKUP_DIR error"; exit 1; }
+mkdir -p "$BACKUP_DIR" || { echo "Create $BACKUP_DIR error"; exit 1; }
 
 pushd . > /dev/null
 cd "$BACKUP_DIR" || { echo "CD $BACKUP_DIR error"; exit 1; }
@@ -51,15 +53,15 @@ popd > /dev/null
 popd > /dev/null
 
 echo "Create package ..."
-tar zcf vim_cfg_`date +%Y%m%d`.tgz $VIM_CFG
+tar zcf $TGZ_FILE $VIM_CFG
 if [ $? -ne 0 ];then
     echo "ERROR"
     exit 1
 fi
-rm -rf $BACKUP_DIR
+rm -rf "$BACKUP_DIR"
 
 echo
 echo "done."
-echo "The vim config has been packed into $ROOT_DIR/vim_cfg_`date +%Y%m%d`.tgz"
+echo "The vim config has been packed into $ROOT_DIR/$TGZ_FILE"
 echo
 exit 0
