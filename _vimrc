@@ -15,14 +15,15 @@ Plugin 'tpope/vim-commentary'
 Plugin 'ConradIrwin/vim-bracketed-paste'
 Plugin 'Shougo/neocomplcache.vim'
 Plugin 'Shougo/vinarise.vim'
+"Plugin 'sjl/gundo.vim'
 Plugin 'mbbill/undotree'
 Plugin 'majutsushi/tagbar'
 Plugin 'scrooloose/nerdtree'
 Plugin 'junegunn/vim-pseudocl'
 Plugin 'junegunn/vim-oblique'
 Plugin 'will133/vim-dirdiff'
-Plugin 'rking/ag.vim'
-"Plugin 'sjl/gundo.vim'
+"Plugin 'rking/ag.vim'
+Plugin 'dkprice/vim-easygrep'
 "Plugin 'chrisbra/csv.vim'
 call vundle#end()
 filetype plugin indent on
@@ -81,6 +82,12 @@ if has("gui_running")
     "set cursorcolumn           "Highlight current column
 endif
 
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"Leader key
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:mapleader = ","
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "paste mode
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -133,6 +140,28 @@ let g:neocomplcache_min_syntax_length = 3   " Set minimum syntax keyword length.
 let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 let g:neocomplcache_disable_auto_complete = 1
 inoremap <expr><C-p> pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"EasyGrep
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let EasyGrepMode = 0
+let EasyGrepRecursive = 1
+let EasyGrepIgnoreCase = 1
+let EasyGrepReplaceWindowMode = 2
+let EasyGrepJumpToMatch = 0
+let g:EasyGrepFilesToExclude = "GPATH,GRTAGS,GTAGS,ctags"
+let EasyGrepWindowPosition = "botright"
+
+if executable('ag')
+    set grepprg=ag
+    let EasyGrepCommand = 1
+elseif executable('grep')
+    set grepprg=grep
+    let EasyGrepCommand = 1
+else
+    set grepprg=''
+    let EasyGrepCommand = 0
+endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "csv
