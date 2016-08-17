@@ -15,13 +15,14 @@ Plugin 'tpope/vim-commentary'
 Plugin 'ConradIrwin/vim-bracketed-paste'
 Plugin 'Shougo/neocomplcache.vim'
 Plugin 'Shougo/vinarise.vim'
-Plugin 'sjl/gundo.vim'
+Plugin 'mbbill/undotree'
 Plugin 'majutsushi/tagbar'
 Plugin 'scrooloose/nerdtree'
 Plugin 'junegunn/vim-pseudocl'
 Plugin 'junegunn/vim-oblique'
 Plugin 'will133/vim-dirdiff'
 Plugin 'rking/ag.vim'
+"Plugin 'sjl/gundo.vim'
 "Plugin 'chrisbra/csv.vim'
 call vundle#end()
 filetype plugin indent on
@@ -67,7 +68,7 @@ set tabstop=4       "Number of spaces that a <Tab> counts for.
 set softtabstop=4   "Number of spaces that a <Tab> counts for while editing.
 set shiftwidth=4    "Number of spaces to be used for each step of (auto)indent.
 set smarttab        "When hitting <Tab> or <Backspace> in front of line, 'shiftwidth' used.
-"set expandtab      "No real tabs(insert spaces when <Tab> pressed).
+set expandtab       "No real tabs(insert spaces when <Tab> pressed).
 set autoindent
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -108,7 +109,9 @@ if v:version >= 703
     "set undoreload=10000           "Number of lines to save for undo
 
     "gundo
-    nnoremap <F7> :GundoToggle<CR>
+    "nnoremap <F7> :GundoToggle<CR>
+    "undotree
+    nnoremap <F7> :UndotreeToggle<CR>
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
