@@ -9,22 +9,20 @@ filetype off
 "set the runtime path to include Vundle and initialize
 set rtp+=$HOME/.vim/bundle/Vundle.vim
 call vundle#begin()
-Plugin 'gmarik/Vundle.vim'
-Plugin 'tpope/vim-endwise'
-Plugin 'tpope/vim-commentary'
-Plugin 'ConradIrwin/vim-bracketed-paste'
-Plugin 'Shougo/neocomplcache.vim'
-Plugin 'Shougo/vinarise.vim'
-"Plugin 'sjl/gundo.vim'
-Plugin 'mbbill/undotree'
-Plugin 'majutsushi/tagbar'
-Plugin 'scrooloose/nerdtree'
-Plugin 'junegunn/vim-pseudocl'
-Plugin 'junegunn/vim-oblique'
-Plugin 'will133/vim-dirdiff'
-"Plugin 'rking/ag.vim'
-Plugin 'dkprice/vim-easygrep'
-"Plugin 'chrisbra/csv.vim'
+Plugin 'gmarik/Vundle.vim'          "Plug-in manager
+Plugin 'tpope/vim-endwise'          "End certain structures automatically(C preprocessor...)
+Plugin 'ConradIrwin/vim-bracketed-paste'    "Paste mode(automatic `:set paste`)
+Plugin 'Shougo/neocomplcache.vim'   "Auto-completion
+Plugin 'Shougo/vinarise.vim'        "HEX edit
+Plugin 'mbbill/undotree'            "Undo history visualizer
+Plugin 'majutsushi/tagbar'          "Browse the tags
+Plugin 'scrooloose/nerdtree'        "File explorer
+Plugin 'will133/vim-dirdiff'        "Diff two directories
+Plugin 'dkprice/vim-easygrep'       "Find and replace across multiple files
+Plugin 'shengkui/c.vim'             "C/C++ IDE(code snippet, run, check)
+Plugin 'shengkui/bash-support'      "Bash IDE(code snippet, run, check)
+"Plugin 'junegunn/vim-pseudocl'     "Pseudo-command-line(required by vim-oblique)
+"Plugin 'junegunn/vim-oblique'      "Improved /-search
 call vundle#end()
 filetype plugin indent on
 endif
@@ -43,6 +41,17 @@ if &t_Co > 2 || has("gui_running")
     syntax on       "syntax highlighting
     set hlsearch    "highlight search pattern
 endif
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"GVIM only
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if has("gui_running")
+    set mouse=a                 "Use mouse everywhere
+    set guifont=monospace\ 14   "Set font of GVIM
+    "set cursorline             "Highlight current line
+    "set cursorcolumn           "Highlight current column
+endif
+
 
 "Allow backspacing over everything in insert mode
 set backspace=indent,eol,start
@@ -71,17 +80,6 @@ set shiftwidth=4    "Number of spaces to be used for each step of (auto)indent.
 set smarttab        "When hitting <Tab> or <Backspace> in front of line, 'shiftwidth' used.
 set expandtab       "No real tabs(insert spaces when <Tab> pressed).
 set autoindent
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"GVIM only
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if has("gui_running")
-    set mouse=a                 "Use mouse everywhere
-    set guifont=monospace\ 14   "Set font of GVIM
-    "set cursorline             "Highlight current line
-    "set cursorcolumn           "Highlight current column
-endif
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Leader key
@@ -115,8 +113,6 @@ if v:version >= 703
     "set undolevels=1000            "How many undos
     "set undoreload=10000           "Number of lines to save for undo
 
-    "gundo
-    "nnoremap <F7> :GundoToggle<CR>
     "undotree
     nnoremap <F7> :UndotreeToggle<CR>
 endif
@@ -130,13 +126,13 @@ let g:tagbar_sort = 0
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "neocomplcache
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:acp_enableAtStartup = 0               " Disable AutoComplPop.
+let g:acp_enableAtStartup = 0               "Disable AutoComplPop.
 let g:neocomplcache_enable_at_startup = 1
 let g:complcache_enable_ignore_case = 0
-let g:neocomplcache_enable_smart_case = 1   " Use smartcase
+let g:neocomplcache_enable_smart_case = 1   "Use smartcase
 let g:neocomplcache_enable_camel_case_completion = 1
-let g:neocomplcache_enable_underbar_completion = 1  " Use underbar completion.
-let g:neocomplcache_min_syntax_length = 3   " Set minimum syntax keyword length.
+let g:neocomplcache_enable_underbar_completion = 1  "Use underbar completion.
+let g:neocomplcache_min_syntax_length = 3   "Set minimum syntax keyword length.
 let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 let g:neocomplcache_disable_auto_complete = 1
 inoremap <expr><C-p> pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
@@ -149,8 +145,8 @@ let EasyGrepRecursive = 1
 let EasyGrepIgnoreCase = 1
 let EasyGrepReplaceWindowMode = 2
 let EasyGrepJumpToMatch = 0
-let g:EasyGrepFilesToExclude = "GPATH,GRTAGS,GTAGS,ctags"
-let EasyGrepWindowPosition = "botright"
+let g:EasyGrepFilesToExclude = "GPATH,GRTAGS,GTAGS,tags,.svn,.git"
+"let EasyGrepWindowPosition = "botright"
 
 if executable('ag')
     set grepprg=ag
