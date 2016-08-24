@@ -37,11 +37,6 @@ runtime ftplugin/man.vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 colorscheme torte
 
-if &t_Co > 2 || has("gui_running")
-    syntax on       "syntax highlighting
-    set hlsearch    "highlight search pattern
-endif
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "GVIM only
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -160,11 +155,6 @@ else
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"csv
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"let g:csv_autocmd_arrange = 1
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "ctags
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Map <Ctrl>+<F12> to generate ctags for current folder
@@ -173,13 +163,11 @@ map <C-F12> :!ctags -R --languages=c,c++,asm --fields=+iaS --extra=+q .<CR><CR>
 "Set ctags search path
 set tags=tags,../tags,../../tags,../../../tags
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "markdown
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "preview
 nmap <leader>m : !markdown_py % \| lynx -stdin <CR><CR>
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Status line
