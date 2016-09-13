@@ -11,6 +11,7 @@ set rtp+=$HOME/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'          "Plug-in manager
 Plugin 'tpope/vim-endwise'          "End certain structures automatically(C preprocessor...)
+Plugin 'raimondi/delimitmate'       "Automatic closing of quotes, parenthesis, brackets, etc.
 Plugin 'ConradIrwin/vim-bracketed-paste'    "Paste mode(automatic `:set paste`)
 Plugin 'Shougo/neocomplcache.vim'   "Auto-completion
 Plugin 'Shougo/vinarise.vim'        "HEX edit
@@ -21,6 +22,7 @@ Plugin 'will133/vim-dirdiff'        "Diff two directories
 Plugin 'dkprice/vim-easygrep'       "Find and replace across multiple files
 Plugin 'shengkui/c.vim'             "C/C++ IDE(code snippet, run, check)
 Plugin 'shengkui/bash-support'      "Bash IDE(code snippet, run, check)
+Plugin 'thinca/vim-quickrun'        "Execute whole/part of editing file and show the result.
 "Plugin 'junegunn/vim-pseudocl'     "Pseudo-command-line(required by vim-oblique)
 "Plugin 'junegunn/vim-oblique'      "Improved /-search
 call vundle#end()
