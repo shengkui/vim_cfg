@@ -22,10 +22,12 @@ Plugin 'will133/vim-dirdiff'        "Diff two directories
 Plugin 'dkprice/vim-easygrep'       "Find and replace across multiple files
 Plugin 'shengkui/c.vim'             "C/C++ IDE(code snippet, run, check)
 Plugin 'shengkui/bash-support'      "Bash IDE(code snippet, run, check)
-Plugin 'thinca/vim-quickrun'        "Execute whole/part of editing file and show the result.
-Plugin 'thirtythreeforty/lessspace.vim' "Strip the trailing whitespace
+"Plugin 'thinca/vim-quickrun'       "Execute whole/part of editing file and show the result.
+"Plugin 'thirtythreeforty/lessspace.vim' "Strip the trailing whitespace
+Plugin 'jsfaint/gen_tags.vim'       "Generate and load tags
 "Plugin 'junegunn/vim-pseudocl'     "Pseudo-command-line(required by vim-oblique)
 "Plugin 'junegunn/vim-oblique'      "Improved /-search
+Plugin 'editorconfig/editorconfig-vim'
 call vundle#end()
 filetype plugin indent on
 endif
@@ -76,7 +78,7 @@ set tabstop=4       "Number of spaces that a <Tab> counts for.
 set softtabstop=4   "Number of spaces that a <Tab> counts for while editing.
 set shiftwidth=4    "Number of spaces to be used for each step of (auto)indent.
 set smarttab        "When hitting <Tab> or <Backspace> in front of line, 'shiftwidth' used.
-set expandtab       "No real tabs(insert spaces when <Tab> pressed).
+"set expandtab      "No real tabs(insert spaces when <Tab> pressed).
 set autoindent
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
