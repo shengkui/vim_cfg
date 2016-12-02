@@ -9,7 +9,7 @@ filetype off
 "set the runtime path to include Vundle and initialize
 set rtp+=$HOME/.vim/bundle/Vundle.vim
 call vundle#begin()
-Plugin 'gmarik/Vundle.vim'          "Plug-in manager
+Plugin 'VundleVim/Vundle.vim'       "Plug-in manager
 Plugin 'tpope/vim-endwise'          "End certain structures automatically(C preprocessor...)
 Plugin 'raimondi/delimitmate'       "Automatic closing of quotes, parenthesis, brackets, etc.
 Plugin 'ConradIrwin/vim-bracketed-paste'    "Paste mode(automatic `:set paste`)
@@ -28,9 +28,11 @@ Plugin 'jsfaint/gen_tags.vim'       "Generate and load tags
 "Plugin 'junegunn/vim-pseudocl'     "Pseudo-command-line(required by vim-oblique)
 "Plugin 'junegunn/vim-oblique'      "Improved /-search
 Plugin 'editorconfig/editorconfig-vim'
+Plugin 'vim-syntastic/syntastic'	"Syntax checking
 call vundle#end()
 filetype plugin indent on
 endif
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Man
@@ -40,6 +42,7 @@ runtime ftplugin/man.vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Color
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+syntax on
 colorscheme torte
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -172,10 +175,22 @@ set tags=tags,../tags,../../tags,../../../tags
 "markdown
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "preview
-nmap <leader>m : !markdown_py % \| lynx -stdin <CR><CR>
+nmap <leader>m : !markdown % \| lynx -stdin <CR><CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Status line
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set statusline=[%F][%{&ff}]%r%m%*%=[Line:%l/%L,Column:%c][%p%%]
 set laststatus=2            "Always show the status line
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"syntastic
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 2
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+"let g:syntastic_c_checkers = ['gcc', 'cppcheck']
