@@ -14,7 +14,6 @@ Plugin 'tpope/vim-endwise'          "End certain structures automatically(C prep
 Plugin 'raimondi/delimitmate'       "Automatic closing of quotes, parenthesis, brackets, etc.
 Plugin 'ConradIrwin/vim-bracketed-paste'    "Paste mode(automatic `:set paste`)
 Plugin 'Shougo/neocomplcache.vim'   "Auto-completion
-"Plugin 'Shougo/vinarise.vim'       "HEX edit
 Plugin 'mbbill/undotree'            "Undo history visualizer
 Plugin 'majutsushi/tagbar'          "Browse the tags
 Plugin 'scrooloose/nerdtree'        "File explorer
@@ -22,11 +21,7 @@ Plugin 'will133/vim-dirdiff'        "Diff two directories
 Plugin 'dkprice/vim-easygrep'       "Find and replace across multiple files
 Plugin 'shengkui/c.vim'             "C/C++ IDE(code snippet, run, check)
 Plugin 'shengkui/bash-support'      "Bash IDE(code snippet, run, check)
-"Plugin 'thinca/vim-quickrun'       "Execute whole/part of editing file and show the result.
-"Plugin 'thirtythreeforty/lessspace.vim' "Strip the trailing whitespace
 Plugin 'jsfaint/gen_tags.vim'       "Generate and load tags
-"Plugin 'junegunn/vim-pseudocl'     "Pseudo-command-line(required by vim-oblique)
-"Plugin 'junegunn/vim-oblique'      "Improved /-search
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'vim-syntastic/syntastic'	"Syntax checking
 call vundle#end()
@@ -56,6 +51,9 @@ if has("gui_running")
 endif
 
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"General
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
