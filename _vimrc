@@ -161,19 +161,17 @@ else
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"ctags
+"gen_tags
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"Map <Ctrl>+<F12> to generate ctags for current folder
-map <C-F12> :!ctags -R --languages=c,c++,asm --fields=+iaS --extra=+q .<CR><CR>
-
-"Set ctags search path
-set tags=tags,../tags,../../tags,../../../tags
+"Map <Ctrl>+<F12> to generate tags
+nnoremap <C-F12> :GenGTAGS<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "markdown
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "preview
-nmap <leader>m : !markdown % \| lynx -stdin <CR><CR>
+"nmap <leader>m :!markdown % \| lynx -stdin <CR><CR>
+nmap <leader>m :!markdown % \| w3m -T text/html<CR><CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Status line
