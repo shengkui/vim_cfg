@@ -13,7 +13,7 @@ Plugin 'VundleVim/Vundle.vim'       "Plug-in manager
 Plugin 'tpope/vim-endwise'          "End certain structures automatically(C preprocessor...)
 Plugin 'raimondi/delimitmate'       "Automatic closing of quotes, parenthesis, brackets, etc.
 Plugin 'ConradIrwin/vim-bracketed-paste'    "Paste mode(automatic `:set paste`)
-Plugin 'Shougo/neocomplcache.vim'   "Auto-completion
+Plugin 'maralla/completor.vim'      "Auto-completion
 Plugin 'mbbill/undotree'            "Undo history visualizer
 Plugin 'majutsushi/tagbar'          "Browse the tags
 Plugin 'scrooloose/nerdtree'        "File explorer
@@ -125,18 +125,10 @@ nnoremap <F8> :TagbarToggle<CR>
 let g:tagbar_sort = 0
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"neocomplcache
+"completor
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:acp_enableAtStartup = 0               "Disable AutoComplPop.
-let g:neocomplcache_enable_at_startup = 1
-let g:complcache_enable_ignore_case = 0
-let g:neocomplcache_enable_smart_case = 1   "Use smartcase
-let g:neocomplcache_enable_camel_case_completion = 1
-let g:neocomplcache_enable_underbar_completion = 1  "Use underbar completion.
-let g:neocomplcache_min_syntax_length = 3   "Set minimum syntax keyword length.
-let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
-let g:neocomplcache_disable_auto_complete = 1
-inoremap <expr><C-p> pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
+let g:completor_auto_trigger = 0
+let g:completor_clang_binary = '/usr/bin/clang'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "EasyGrep
