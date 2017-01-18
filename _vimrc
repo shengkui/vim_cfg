@@ -24,6 +24,7 @@ Plugin 'shengkui/bash-support'      "Bash IDE(code snippet, run, check)
 Plugin 'jsfaint/gen_tags.vim'       "Generate and load tags
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'vim-syntastic/syntastic'	"Syntax checking
+Plugin 'airblade/vim-gitgutter'
 call vundle#end()
 filetype plugin indent on
 endif
@@ -63,14 +64,22 @@ set nobackup            "No backup file
 set number              "Turn on line numbers
 set ruler               "Show current positions at the bottom
 set incsearch           "Do incremental searching
+set hlsearch            "Highlight search strings
 set showmatch           "Show matching brackets
 set showcmd             "Show the command being typed
 set showmode            "Show mode of Insert/Replace/Visual mode
 set linebreak           "Wrap long lines at a blank
+set noerrorbells        "No beep on errors
 
 "Set command-line completion operates in enhanced mode
 set wildmode=list:full
 set wildmenu
+set wildignore=*.o,*~
+
+"Jump to line when reopen a file
+if has("autocmd")
+    au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "TAB
@@ -81,6 +90,9 @@ set shiftwidth=4    "Number of spaces to be used for each step of (auto)indent.
 set smarttab        "When hitting <Tab> or <Backspace> in front of line, 'shiftwidth' used.
 "set expandtab      "No real tabs(insert spaces when <Tab> pressed).
 set autoindent
+
+"Disable expandtab for makefile
+autocmd FileType make setlocal noexpandtab
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Leader key
