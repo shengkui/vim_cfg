@@ -25,6 +25,8 @@ Plugin 'jsfaint/gen_tags.vim'       "Generate and load tags
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'vim-syntastic/syntastic'	"Syntax checking
 Plugin 'airblade/vim-gitgutter'
+Plugin 'chrisbra/vim-diff-enhanced'
+Plugin 'EinfachToll/DidYouMean'
 call vundle#end()
 filetype plugin indent on
 endif
@@ -38,7 +40,7 @@ runtime ftplugin/man.vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Color
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-syntax on
+syntax enable
 colorscheme torte
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -70,11 +72,11 @@ set showcmd             "Show the command being typed
 set showmode            "Show mode of Insert/Replace/Visual mode
 set linebreak           "Wrap long lines at a blank
 set noerrorbells        "No beep on errors
+set wildignore=*.o,*~
 
 "Set command-line completion operates in enhanced mode
 set wildmode=list:full
 set wildmenu
-set wildignore=*.o,*~
 
 "Jump to line when reopen a file
 if has("autocmd")
@@ -98,6 +100,14 @@ autocmd FileType make setlocal noexpandtab
 "Leader key
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:mapleader = ","
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"Switching windows
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+noremap <c-j> <c-w>j
+noremap <c-k> <c-w>k
+noremap <c-l> <c-w>l
+noremap <c-h> <c-w>h
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "paste mode
