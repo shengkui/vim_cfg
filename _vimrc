@@ -9,24 +9,23 @@ filetype off
 "set the runtime path to include Vundle and initialize
 set rtp+=$HOME/.vim/bundle/Vundle.vim
 call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'       "Plug-in manager
-Plugin 'tpope/vim-endwise'          "End certain structures automatically(C preprocessor...)
-Plugin 'raimondi/delimitmate'       "Automatic closing of quotes, parenthesis, brackets, etc.
+Plugin 'VundleVim/Vundle.vim'           "Plug-in manager
+Plugin 'tpope/vim-endwise'              "End certain structures automatically(C preprocessor...)
 Plugin 'ConradIrwin/vim-bracketed-paste'    "Paste mode(automatic `:set paste`)
-Plugin 'maralla/completor.vim'      "Auto-completion
-Plugin 'mbbill/undotree'            "Undo history visualizer
-Plugin 'majutsushi/tagbar'          "Browse the tags
-Plugin 'scrooloose/nerdtree'        "File explorer
-Plugin 'will133/vim-dirdiff'        "Diff two directories
-Plugin 'dkprice/vim-easygrep'       "Find and replace across multiple files
-Plugin 'shengkui/c.vim'             "C/C++ IDE(code snippet, run, check)
-Plugin 'shengkui/bash-support'      "Bash IDE(code snippet, run, check)
-Plugin 'jsfaint/gen_tags.vim'       "Generate and load tags
-Plugin 'editorconfig/editorconfig-vim'
-Plugin 'vim-syntastic/syntastic'	"Syntax checking
-Plugin 'airblade/vim-gitgutter'
-Plugin 'chrisbra/vim-diff-enhanced'
-Plugin 'EinfachToll/DidYouMean'
+Plugin 'justmao945/vim-clang'           "Auto-completion
+Plugin 'mbbill/undotree'                "Undo history visualizer
+Plugin 'majutsushi/tagbar'              "Browse the tags
+Plugin 'scrooloose/nerdtree'            "File explorer
+Plugin 'will133/vim-dirdiff'            "Diff two directories
+Plugin 'dkprice/vim-easygrep'           "Find and replace across multiple files
+Plugin 'shengkui/c.vim'                 "C/C++ IDED(code snippet, run, check)
+Plugin 'shengkui/bash-support'          "Bash IDE(code snippet, run, check)
+Plugin 'jsfaint/gen_tags.vim'           "Generate and load tags
+Plugin 'editorconfig/editorconfig-vim'  "EditorConfig
+Plugin 'vim-syntastic/syntastic'        "Syntax checking
+Plugin 'airblade/vim-gitgutter'         "Show git diff in the gutter
+Plugin 'chrisbra/vim-diff-enhanced'     "Better Diff
+Plugin 'EinfachToll/DidYouMean'         "Ask for the right file to open
 call vundle#end()
 filetype plugin indent on
 endif
@@ -65,9 +64,11 @@ set nobackup            "No backup file
 
 set number              "Turn on line numbers
 set ruler               "Show current positions at the bottom
+
 set incsearch           "Do incremental searching
 set hlsearch            "Highlight search strings
 set showmatch           "Show matching brackets
+
 set showcmd             "Show the command being typed
 set showmode            "Show mode of Insert/Replace/Visual mode
 set linebreak           "Wrap long lines at a blank
@@ -86,28 +87,23 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "TAB
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set tabstop=4       "Number of spaces that a <Tab> counts for.
-set softtabstop=4   "Number of spaces that a <Tab> counts for while editing.
-set shiftwidth=4    "Number of spaces to be used for each step of (auto)indent.
-set smarttab        "When hitting <Tab> or <Backspace> in front of line, 'shiftwidth' used.
-"set expandtab      "No real tabs(insert spaces when <Tab> pressed).
+set tabstop=4           "Number of spaces that a <Tab> counts for.
+set softtabstop=4       "Number of spaces that a <Tab> counts for while editing.
+set shiftwidth=4        "Number of spaces to be used for each step of (auto)indent.
+set smarttab            "When hitting <Tab> or <Backspace> in front of line, 'shiftwidth' used.
+"set expandtab          "No real tabs(insert spaces when <Tab> pressed).
 set autoindent
 
-"Disable expandtab for makefile
+"Set expandtab for some filetype
 autocmd FileType make setlocal noexpandtab
+autocmd FileType vim setlocal expandtab
+au BufRead,BufNewFile *.log  set filetype=text
+autocmd FileType text setlocal expandtab
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Leader key
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:mapleader = ","
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"Switching windows
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-noremap <c-j> <c-w>j
-noremap <c-k> <c-w>k
-noremap <c-l> <c-w>l
-noremap <c-h> <c-w>h
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "paste mode
@@ -147,10 +143,13 @@ nnoremap <F8> :TagbarToggle<CR>
 let g:tagbar_sort = 0
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"completor
+"vim-clang
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:completor_auto_trigger = 0
-let g:completor_clang_binary = '/usr/bin/clang'
+let g:clang_auto = 1
+let g:clang_c_options = '-std=gnu11'
+let g:clang_c_completeopt = 'longest,menuone,preview'
+let g:clang_cpp_options = '-std=c++11 -stdlib=libc++'
+let g:clang_cpp_completeopt = 'longest,menuone,preview'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "EasyGrep
