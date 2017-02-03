@@ -26,6 +26,7 @@ Plugin 'vim-syntastic/syntastic'        "Syntax checking
 Plugin 'airblade/vim-gitgutter'         "Show git diff in the gutter
 Plugin 'chrisbra/vim-diff-enhanced'     "Better Diff
 Plugin 'EinfachToll/DidYouMean'         "Ask for the right file to open
+Plugin 'rhysd/committia.vim'            "Improve for Git commit messag editor
 call vundle#end()
 filetype plugin indent on
 endif
@@ -83,6 +84,12 @@ set wildmenu
 if has("autocmd")
     au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"Status line
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set statusline=[%F][%{&ff}]%r%m%*%=[Line:%l/%L,Column:%c][%p%%]
+set laststatus=2            "Always show the status line
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "TAB
@@ -185,12 +192,6 @@ nnoremap <C-F12> :GenGTAGS<CR>
 "preview
 "nmap <leader>m :!markdown % \| lynx -stdin <CR><CR>
 nmap <leader>m :!markdown % \| w3m -T text/html<CR><CR>
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"Status line
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set statusline=[%F][%{&ff}]%r%m%*%=[Line:%l/%L,Column:%c][%p%%]
-set laststatus=2            "Always show the status line
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "syntastic
