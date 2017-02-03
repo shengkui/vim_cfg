@@ -27,6 +27,7 @@ Plugin 'airblade/vim-gitgutter'         "Show git diff in the gutter
 Plugin 'chrisbra/vim-diff-enhanced'     "Better Diff
 Plugin 'EinfachToll/DidYouMean'         "Ask for the right file to open
 Plugin 'rhysd/committia.vim'            "Improve for Git commit messag editor
+Plugin 'tpope/vim-fugitive'             "Git Wrapper
 call vundle#end()
 filetype plugin indent on
 endif
