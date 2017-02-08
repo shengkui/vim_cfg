@@ -18,16 +18,16 @@ Plugin 'majutsushi/tagbar'              "Browse the tags
 Plugin 'scrooloose/nerdtree'            "File explorer
 Plugin 'will133/vim-dirdiff'            "Diff two directories
 Plugin 'dkprice/vim-easygrep'           "Find and replace across multiple files
-Plugin 'shengkui/c.vim'                 "C/C++ IDED(code snippet, run, check)
-Plugin 'shengkui/bash-support'          "Bash IDE(code snippet, run, check)
 Plugin 'jsfaint/gen_tags.vim'           "Generate and load tags
 Plugin 'editorconfig/editorconfig-vim'  "EditorConfig
 Plugin 'vim-syntastic/syntastic'        "Syntax checking
-Plugin 'airblade/vim-gitgutter'         "Show git diff in the gutter
+"Plugin 'airblade/vim-gitgutter'         "Show git diff in the gutter
 Plugin 'chrisbra/vim-diff-enhanced'     "Better Diff
 Plugin 'EinfachToll/DidYouMean'         "Ask for the right file to open
 Plugin 'rhysd/committia.vim'            "Improve for Git commit messag editor
 Plugin 'tpope/vim-fugitive'             "Git Wrapper
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
 call vundle#end()
 filetype plugin indent on
 endif
@@ -158,6 +158,18 @@ let g:clang_c_options = '-std=gnu11'
 let g:clang_c_completeopt = 'longest,menuone,preview'
 let g:clang_cpp_options = '-std=c++11 -stdlib=libc++'
 let g:clang_cpp_completeopt = 'longest,menuone,preview'
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"ultisnips
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+"let g:UltiSnipsSnippetDirectories=["UltiSnips"]
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "EasyGrep
