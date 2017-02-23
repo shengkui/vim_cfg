@@ -44,6 +44,19 @@ runtime ftplugin/man.vim
 syntax enable
 colorscheme torte
 
+"Toggle color scheme
+function! g:ToggleBackground()
+    if &background != 'dark'
+        set background=dark
+        colorscheme torte
+    else
+        set background=light
+        colorscheme delek
+    endif
+endfunction
+nnoremap <silent> <F6> :call g:ToggleBackground()<CR>
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "GVIM only
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -158,7 +171,6 @@ let g:clang_c_options = '-std=gnu11'
 let g:clang_c_completeopt = 'longest,menuone,preview'
 let g:clang_cpp_options = '-std=c++11 -stdlib=libc++'
 let g:clang_cpp_completeopt = 'longest,menuone,preview'
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "ultisnips
