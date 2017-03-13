@@ -21,13 +21,14 @@ Plugin 'dkprice/vim-easygrep'           "Find and replace across multiple files
 Plugin 'jsfaint/gen_tags.vim'           "Generate and load tags
 Plugin 'editorconfig/editorconfig-vim'  "EditorConfig
 Plugin 'vim-syntastic/syntastic'        "Syntax checking
-"Plugin 'airblade/vim-gitgutter'         "Show git diff in the gutter
+"Plugin 'airblade/vim-gitgutter'        "Show git diff in the gutter
 Plugin 'chrisbra/vim-diff-enhanced'     "Better Diff
 Plugin 'EinfachToll/DidYouMean'         "Ask for the right file to open
 Plugin 'rhysd/committia.vim'            "Improve for Git commit messag editor
 Plugin 'tpope/vim-fugitive'             "Git Wrapper
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
+Plugin 'junegunn/gv.vim'                "Git commit browser
+Plugin 'SirVer/ultisnips'               "Code snippet
+Plugin 'honza/vim-snippets'             "Code snippet
 call vundle#end()
 filetype plugin indent on
 endif
