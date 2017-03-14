@@ -8,7 +8,7 @@ BACKUP_DIR="$ROOT_DIR/$VIM_CFG"
 VUNDLE_DIR="$BACKUP_DIR/.vim/bundle"
 UNDO_DIR="$BACKUP_DIR/.vim/undo"
 VUNDLE_PLUGIN="Vundle.vim"
-TGZ_FILE="vim_cfg_`date +%Y%m%d`.tgz"
+TGZ_FILE="vim_cfg_$(date +%Y%m%d).tgz"
 
 #Jump to home
 cd "$ROOT_DIR" || { echo "CD $ROOT_DIR error"; exit 1; }
@@ -31,10 +31,13 @@ rm -f "$BACKUP_DIR/.vim/.netrwhist"
 
 #----------------------------------------------
 echo "Clean undo files ..."
-pushd . > /dev/null
-cd "$UNDO_DIR" || { echo "CD $UNDO_DIR error"; exit 1; }
-rm -f *
-popd > /dev/null
+#pushd . > /dev/null
+#cd "$UNDO_DIR" || { echo "CD $UNDO_DIR error"; exit 1; }
+#rm -f *
+#popd > /dev/null
+if [ -d "$UNDO_DIR" ] ;then
+    rm -f "$UNDO_DIR"/*
+fi
 
 #----------------------------------------------
 echo "Clean vim plugins ..."
@@ -53,11 +56,7 @@ popd > /dev/null
 popd > /dev/null
 
 echo "Create package ..."
-tar zcf $TGZ_FILE $VIM_CFG
-if [ $? -ne 0 ];then
-    echo "ERROR"
-    exit 1
-fi
+tar zcf "$TGZ_FILE" "$VIM_CFG" || { echo "ERROR"; exit 1; }
 rm -rf "$BACKUP_DIR"
 
 echo
