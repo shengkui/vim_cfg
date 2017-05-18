@@ -29,6 +29,9 @@ Plugin 'tpope/vim-fugitive'             "Git Wrapper
 Plugin 'junegunn/gv.vim'                "Git commit browser
 Plugin 'SirVer/ultisnips'               "Code snippet
 Plugin 'honza/vim-snippets'             "Code snippet
+"Plugin 'octol/vim-cpp-enhanced-highlight'
+Plugin 'embear/vim-foldsearch'          "Fold away lines that don't match a search pattern
+
 call vundle#end()
 filetype plugin indent on
 endif
