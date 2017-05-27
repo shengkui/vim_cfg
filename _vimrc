@@ -20,7 +20,7 @@ Plugin 'will133/vim-dirdiff'            "Diff two directories
 Plugin 'dkprice/vim-easygrep'           "Find and replace across multiple files
 Plugin 'jsfaint/gen_tags.vim'           "Generate and load tags
 Plugin 'editorconfig/editorconfig-vim'  "EditorConfig
-Plugin 'vim-syntastic/syntastic'        "Syntax checking
+Plugin 'w0rp/ale'                       "Lint(Syntax checking)
 "Plugin 'airblade/vim-gitgutter'        "Show git diff in the gutter
 Plugin 'chrisbra/vim-diff-enhanced'     "Better Diff
 Plugin 'EinfachToll/DidYouMean'         "Ask for the right file to open
@@ -31,7 +31,6 @@ Plugin 'SirVer/ultisnips'               "Code snippet
 Plugin 'honza/vim-snippets'             "Code snippet
 "Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'embear/vim-foldsearch'          "Fold away lines that don't match a search pattern
-
 call vundle#end()
 filetype plugin indent on
 endif
@@ -223,16 +222,30 @@ nnoremap <C-F12> :GenGTAGS<CR>
 nmap <leader>m :!markdown % \| w3m -T text/html<CR><CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"syntastic
+"ALE
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 2
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-"let g:syntastic_c_checkers = ['gcc', 'cppcheck']
+" Map movement through errors without wrapping.
+nmap <silent> <C-k> <Plug>(ale_previous)
+nmap <silent> <C-j> <Plug>(ale_next)
+
+"let g:ale_linters = {
+"\   'c': ['cppcheck'],
+"\}
+let g:ale_c_clang_options="-std=gnu11 -Wall"
+let g:ale_c_gcc_options="-std=gnu11 -Wall"
+let g:ale_cpp_clang_options="-std=gnu++14 -Wall"
+let g:ale_cpp_gcc_options="-std=gnu++14 -Wall"
+
+function! LinterStatus() abort
+    let l:counts = ale#statusline#Count(bufnr(''))
+    let l:all_errors = l:counts.error + l:counts.style_error
+    let l:all_non_errors = l:counts.total - l:all_errors
+
+    return l:counts.total == 0 ? 'OK' : printf(
+    \   'W%d E%d', all_non_errors, all_errors
+    \)
+endfunction
+set statusline+=[%{LinterStatus()}]
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "editorconfig
@@ -241,4 +254,3 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
-
