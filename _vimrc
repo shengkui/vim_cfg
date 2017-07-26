@@ -5,34 +5,43 @@ set nocompatible
 "Vundle
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if !has("compatible")
-filetype off
-"set the runtime path to include Vundle and initialize
-set rtp+=$HOME/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'           "Plug-in manager
-Plugin 'tpope/vim-endwise'              "End certain structures automatically(C preprocessor...)
-Plugin 'ConradIrwin/vim-bracketed-paste'    "Paste mode(automatic `:set paste`)
-Plugin 'justmao945/vim-clang'           "Auto-completion
-Plugin 'mbbill/undotree'                "Undo history visualizer
-Plugin 'majutsushi/tagbar'              "Browse the tags
-Plugin 'scrooloose/nerdtree'            "File explorer
-Plugin 'will133/vim-dirdiff'            "Diff two directories
-Plugin 'dkprice/vim-easygrep'           "Find and replace across multiple files
-Plugin 'jsfaint/gen_tags.vim'           "Generate and load tags
-Plugin 'editorconfig/editorconfig-vim'  "EditorConfig
-Plugin 'w0rp/ale'                       "Lint(Syntax checking)
-"Plugin 'airblade/vim-gitgutter'        "Show git diff in the gutter
-Plugin 'chrisbra/vim-diff-enhanced'     "Better Diff
-Plugin 'EinfachToll/DidYouMean'         "Ask for the right file to open
-Plugin 'rhysd/committia.vim'            "Improve for Git commit messag editor
-Plugin 'tpope/vim-fugitive'             "Git Wrapper
-Plugin 'junegunn/gv.vim'                "Git commit browser
-Plugin 'SirVer/ultisnips'               "Code snippet
-Plugin 'honza/vim-snippets'             "Code snippet
-"Plugin 'octol/vim-cpp-enhanced-highlight'
-Plugin 'embear/vim-foldsearch'          "Fold away lines that don't match a search pattern
-call vundle#end()
-filetype plugin indent on
+"filetype off
+"Specify a directory for plugins
+call plug#begin('~/.vim/bundle')
+Plug 'justmao945/vim-clang'             "Auto-completion
+Plug 'tpope/vim-endwise'                "End certain structures automatically(C preprocessor...)
+Plug 'SirVer/ultisnips'                 "Code snippet
+Plug 'honza/vim-snippets'               "Code snippet
+Plug 'jsfaint/gen_tags.vim'             "Generate and load tags
+Plug 'majutsushi/tagbar'                "Browse the tags
+Plug 'Raimondi/delimitMate'             "Auto closing of parenthesis, brackets, ...
+
+Plug 'editorconfig/editorconfig-vim'    "EditorConfig
+Plug 'w0rp/ale'                         "Lint(Syntax checking)
+"Plug 'vim-syntastic/syntastic'
+Plug 'embear/vim-foldsearch'            "Fold away lines that don't match a search pattern
+Plug 'gko/vim-coloresque'               "CSS/LESS/SASS/HTML color preview
+
+Plug 'rhysd/committia.vim'              "Improve for Git commit message editor
+Plug 'tpope/vim-fugitive'               "Git Wrapper
+"Plug 'junegunn/gv.vim'                 "Git commit browser
+
+Plug 'dkprice/vim-easygrep'             "Find and replace across multiple files
+Plug 'tpope/vim-surround'               "Easily add, delete and change parentheses/brackets/quotes
+Plug 'tpope/vim-repeat'                 "Repeating supported plugin maps with '.'
+
+Plug 'will133/vim-dirdiff', { 'on': 'DirDiff' }     "Diff two directories
+Plug 'chrisbra/vim-diff-enhanced'       "Better Diff
+
+Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }  "Undo history visualizer
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }  "File explorer
+Plug 'EinfachToll/DidYouMean'           "Ask for the right file to open
+Plug 'ConradIrwin/vim-bracketed-paste'  "Paste mode(automatic `:set paste`)
+
+Plug 'vim-airline/vim-airline'          "Status/tabline
+Plug 'vim-airline/vim-airline-themes'
+call plug#end()
+"filetype plugin indent on
 endif
 
 
@@ -115,7 +124,7 @@ set tabstop=4           "Number of spaces that a <Tab> counts for.
 set softtabstop=4       "Number of spaces that a <Tab> counts for while editing.
 set shiftwidth=4        "Number of spaces to be used for each step of (auto)indent.
 set smarttab            "When hitting <Tab> or <Backspace> in front of line, 'shiftwidth' used.
-"set expandtab          "No real tabs(insert spaces when <Tab> pressed).
+set expandtab           "No real tabs(insert spaces when <Tab> pressed).
 set autoindent
 
 "Set expandtab for some filetype
@@ -224,17 +233,18 @@ nmap <leader>m :!markdown % \| w3m -T text/html<CR><CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "ALE
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Map movement through errors without wrapping.
-nmap <silent> <C-k> <Plug>(ale_previous)
-nmap <silent> <C-j> <Plug>(ale_next)
-
-"let g:ale_linters = {
-"\   'c': ['cppcheck'],
-"\}
+"Map movement through errors with wrapping.
+nmap <silent> <C-h> <Plug>(ale_previous_wrap)
+nmap <silent> <C-l> <Plug>(ale_next_wrap)
 let g:ale_c_clang_options="-std=gnu11 -Wall"
 let g:ale_c_gcc_options="-std=gnu11 -Wall"
 let g:ale_cpp_clang_options="-std=gnu++14 -Wall"
 let g:ale_cpp_gcc_options="-std=gnu++14 -Wall"
+let g:ale_sh_shellcheck_options="-x"
+let g:ale_sh_shellcheck_exclusions="SC2086,SC2181,SC2006,SC2039,SC2162"
+let g:ale_c_cppcheck_options="--enable=style --suppress=variableScope"
+let g:ale_cpp_cppcheck_options="--enable=style --suppress=variableScope"
+let g:ale_linters = {'cpp': ['cppcheck', 'clang']}
 
 function! LinterStatus() abort
     let l:counts = ale#statusline#Count(bufnr(''))
@@ -248,9 +258,33 @@ endfunction
 set statusline+=[%{LinterStatus()}]
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"Syntastic
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 2
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
+"let g:syntastic_sh_shellcheck_args='-x -e SC2086,SC2181,SC2006,SC2039,SC2162'
+"let g:syntastic_c_cppcheck_args='--enable=style --suppress=variableScope'
+"let g:syntastic_cpp_cppcheck_args='--enable=style --suppress=variableScope
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "editorconfig
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"airline
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+"let g:airline_symbols_ascii = 1
+"let g:airline#extensions#whitespace#enabled = 0
+"let g:airline#extensions#syntastic#enabled = 1
+
 
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
