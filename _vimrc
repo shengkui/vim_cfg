@@ -55,6 +55,7 @@ runtime ftplugin/man.vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax enable
 colorscheme torte
+set term=xterm-256color
 
 "Toggle color scheme
 function! g:ToggleBackground()
@@ -74,7 +75,8 @@ nnoremap <silent> <F6> :call g:ToggleBackground()<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if has("gui_running")
     set mouse=a                 "Use mouse everywhere
-    set guifont=monospace\ 14   "Set font of GVIM
+    "set guifont=monospace\ 14   "Set font of GVIM
+    set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 14
     "set cursorline             "Highlight current line
     "set cursorcolumn           "Highlight current column
 endif
@@ -132,6 +134,12 @@ autocmd FileType make setlocal noexpandtab
 autocmd FileType vim setlocal expandtab
 au BufRead,BufNewFile *.log  set filetype=text
 autocmd FileType text setlocal expandtab
+
+
+"C/C++: Highlight trailling space
+let c_space_errors = 1
+"C/C++: Highlight mixed tab and space
+let c_space_error = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Leader key
@@ -236,14 +244,14 @@ nmap <leader>m :!markdown % \| w3m -T text/html<CR><CR>
 "Map movement through errors with wrapping.
 nmap <silent> <C-h> <Plug>(ale_previous_wrap)
 nmap <silent> <C-l> <Plug>(ale_next_wrap)
-let g:ale_c_clang_options="-std=gnu11 -Wall"
-let g:ale_c_gcc_options="-std=gnu11 -Wall"
-let g:ale_cpp_clang_options="-std=gnu++14 -Wall"
-let g:ale_cpp_gcc_options="-std=gnu++14 -Wall"
-let g:ale_sh_shellcheck_options="-x"
-let g:ale_sh_shellcheck_exclusions="SC2086,SC2181,SC2006,SC2039,SC2162"
-let g:ale_c_cppcheck_options="--enable=style --suppress=variableScope"
-let g:ale_cpp_cppcheck_options="--enable=style --suppress=variableScope"
+let g:ale_c_clang_options='-std=gnu11 -Wall'
+let g:ale_c_gcc_options='-std=gnu11 -Wall'
+let g:ale_cpp_clang_options='-std=gnu++14 -Wall'
+let g:ale_cpp_gcc_options='-std=gnu++14 -Wall'
+let g:ale_sh_shellcheck_options='-x'
+let g:ale_sh_shellcheck_exclusions='SC2086,SC2181,SC2006,SC2039,SC2162'
+let g:ale_c_cppcheck_options='--enable=style --suppress=variableScope'
+let g:ale_cpp_cppcheck_options='--enable=style --suppress=variableScope'
 let g:ale_linters = {'cpp': ['cppcheck', 'clang']}
 
 function! LinterStatus() abort
@@ -269,7 +277,7 @@ set statusline+=[%{LinterStatus()}]
 "let g:syntastic_check_on_wq = 0
 "let g:syntastic_sh_shellcheck_args='-x -e SC2086,SC2181,SC2006,SC2039,SC2162'
 "let g:syntastic_c_cppcheck_args='--enable=style --suppress=variableScope'
-"let g:syntastic_cpp_cppcheck_args='--enable=style --suppress=variableScope
+"let g:syntastic_cpp_cppcheck_args='--enable=style --suppress=variableScope'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "editorconfig
@@ -284,7 +292,7 @@ let g:airline_powerline_fonts = 1
 "let g:airline_symbols_ascii = 1
 "let g:airline#extensions#whitespace#enabled = 0
 "let g:airline#extensions#syntastic#enabled = 1
-
+let g:airline#extensions#whitespace#mixed_indent_algo = 1
 
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
