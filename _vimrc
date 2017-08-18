@@ -138,8 +138,6 @@ autocmd FileType text setlocal expandtab
 
 "C/C++: Highlight trailling space
 let c_space_errors = 1
-"C/C++: Highlight mixed tab and space
-let c_space_error = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Leader key
