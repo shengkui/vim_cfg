@@ -9,18 +9,21 @@ if !has("compatible")
 "Specify a directory for plugins
 call plug#begin('~/.vim/bundle')
 Plug 'justmao945/vim-clang'             "Auto-completion
+Plug 'lifepillar/vim-mucomplete'        "Auto-completion
 Plug 'tpope/vim-endwise'                "End certain structures automatically(C preprocessor...)
 Plug 'SirVer/ultisnips'                 "Code snippet
 Plug 'honza/vim-snippets'               "Code snippet
 Plug 'jsfaint/gen_tags.vim'             "Generate and load tags
 Plug 'majutsushi/tagbar'                "Browse the tags
 Plug 'Raimondi/delimitMate'             "Auto closing of parenthesis, brackets, ...
+Plug 'fatih/vim-go'                     "Golang support
 
 Plug 'editorconfig/editorconfig-vim'    "EditorConfig
 Plug 'w0rp/ale'                         "Lint(Syntax checking)
 "Plug 'vim-syntastic/syntastic'
 Plug 'embear/vim-foldsearch'            "Fold away lines that don't match a search pattern
 Plug 'gko/vim-coloresque'               "CSS/LESS/SASS/HTML color preview
+Plug 'yggdroot/indentline'              "Display indention levels
 
 Plug 'rhysd/committia.vim'              "Improve for Git commit message editor
 Plug 'tpope/vim-fugitive'               "Git Wrapper
@@ -120,6 +123,11 @@ set statusline=[%F][%{&ff}]%r%m%*%=[Line:%l/%L,Column:%c][%p%%]
 set laststatus=2            "Always show the status line
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"Leader key
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:mapleader = ","
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "TAB
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set tabstop=4           "Number of spaces that a <Tab> counts for.
@@ -135,14 +143,15 @@ autocmd FileType vim setlocal expandtab
 au BufRead,BufNewFile *.log  set filetype=text
 autocmd FileType text setlocal expandtab
 
-
 "C/C++: Highlight trailling space
-let c_space_errors = 1
+"let c_space_errors = 1
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"Leader key
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:mapleader = ","
+"Key mapping for remove trailling space
+nmap <Leader>l :%s/\s*$//g<CR>:noh<CR>
+
+"Show special chars
+set listchars=tab:\|\ ,nbsp:~,extends:>,precedes:<,trail:-
+set list
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "paste mode
@@ -189,6 +198,14 @@ let g:clang_c_options = '-std=gnu11'
 let g:clang_c_completeopt = 'longest,menuone,preview'
 let g:clang_cpp_options = '-std=c++11 -stdlib=libc++'
 let g:clang_cpp_completeopt = 'longest,menuone,preview'
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"vim-mucomplete
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set noshowmode shortmess+=c
+set completeopt-=preview
+set completeopt+=longest,menuone,noinsert,noselect
+let g:mucomplete#enable_auto_at_startup = 0
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "ultisnips
@@ -250,7 +267,11 @@ let g:ale_sh_shellcheck_options='-x'
 let g:ale_sh_shellcheck_exclusions='SC2086,SC2181,SC2006,SC2039,SC2162'
 let g:ale_c_cppcheck_options='--enable=style --suppress=variableScope'
 let g:ale_cpp_cppcheck_options='--enable=style --suppress=variableScope'
-let g:ale_linters = {'cpp': ['cppcheck', 'clang']}
+let g:ale_linters = {
+            \ 'cpp': ['cppcheck', 'clang'],
+            \ 'go': ['gometalinter', 'gofmt'],
+            \ }
+let b:ale_go_gometalinter_options='--fast --min-confidence=.81'
 
 function! LinterStatus() abort
     let l:counts = ale#statusline#Count(bufnr(''))
@@ -276,6 +297,7 @@ set statusline+=[%{LinterStatus()}]
 "let g:syntastic_sh_shellcheck_args='-x -e SC2086,SC2181,SC2006,SC2039,SC2162'
 "let g:syntastic_c_cppcheck_args='--enable=style --suppress=variableScope'
 "let g:syntastic_cpp_cppcheck_args='--enable=style --suppress=variableScope'
+"let g:syntastic_go_gometalinter_args='--fast --min-confidence=.81'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "editorconfig
@@ -292,5 +314,10 @@ let g:airline_powerline_fonts = 1
 "let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
 
-" Switch CWD to the directory of the open buffer
+"Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"vim-go
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+au FileType go nmap <leader>r <Plug>(go-run)
