@@ -17,6 +17,7 @@ Plug 'jsfaint/gen_tags.vim'             "Generate and load tags
 Plug 'majutsushi/tagbar'                "Browse the tags
 Plug 'Raimondi/delimitMate'             "Auto closing of parenthesis, brackets, ...
 Plug 'fatih/vim-go'                     "Golang support
+Plug 'buoto/gotests-vim'                "Go test
 
 Plug 'editorconfig/editorconfig-vim'    "EditorConfig
 Plug 'w0rp/ale'                         "Lint(Syntax checking)
