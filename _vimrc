@@ -24,7 +24,7 @@ Plug 'w0rp/ale'                         "Lint(Syntax checking)
 "Plug 'vim-syntastic/syntastic'
 Plug 'embear/vim-foldsearch'            "Fold away lines that don't match a search pattern
 Plug 'gko/vim-coloresque'               "CSS/LESS/SASS/HTML color preview
-Plug 'yggdroot/indentline'              "Display indention levels
+"Plug 'yggdroot/indentline'             "Display indention levels
 
 Plug 'rhysd/committia.vim'              "Improve for Git commit message editor
 Plug 'tpope/vim-fugitive'               "Git Wrapper
