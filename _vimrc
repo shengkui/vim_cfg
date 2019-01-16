@@ -15,24 +15,25 @@ Plug 'SirVer/ultisnips'                 "Code snippet
 Plug 'honza/vim-snippets'               "Code snippet
 Plug 'jsfaint/gen_tags.vim'             "Generate and load tags
 Plug 'majutsushi/tagbar'                "Browse the tags
-Plug 'Raimondi/delimitMate'             "Auto closing of parenthesis, brackets, ...
+"Plug 'Raimondi/delimitMate'            "Auto closing of parenthesis, brackets, ...
 Plug 'fatih/vim-go'                     "Golang support
-Plug 'buoto/gotests-vim'                "Go test
+Plug 'buoto/gotests-vim'                "Generate table driven tests easily
 
 Plug 'editorconfig/editorconfig-vim'    "EditorConfig
 Plug 'w0rp/ale'                         "Lint(Syntax checking)
 "Plug 'vim-syntastic/syntastic'
 Plug 'embear/vim-foldsearch'            "Fold away lines that don't match a search pattern
 Plug 'gko/vim-coloresque'               "CSS/LESS/SASS/HTML color preview
-"Plug 'yggdroot/indentline'             "Display indention levels
+Plug 'yggdroot/indentline'              "Display indention levels
 
 Plug 'rhysd/committia.vim'              "Improve for Git commit message editor
 Plug 'tpope/vim-fugitive'               "Git Wrapper
 "Plug 'junegunn/gv.vim'                 "Git commit browser
+Plug 'mhinz/vim-signify'                "Show a diff using Vim its sign column.
 
 Plug 'dkprice/vim-easygrep'             "Find and replace across multiple files
 Plug 'tpope/vim-surround'               "Easily add, delete and change parentheses/brackets/quotes
-Plug 'tpope/vim-repeat'                 "Repeating supported plugin maps with '.'
+"Plug 'tpope/vim-repeat'                "Repeating supported plugin maps with '.'
 
 Plug 'will133/vim-dirdiff', { 'on': 'DirDiff' }     "Diff two directories
 Plug 'chrisbra/vim-diff-enhanced'       "Better Diff
@@ -154,6 +155,9 @@ nmap <Leader>l :%s/\s*$//g<CR>:noh<CR>
 set listchars=tab:\|\ ,nbsp:~,extends:>,precedes:<,trail:-
 set list
 
+"Show line margin in color
+set colorcolumn=80
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "paste mode
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -194,7 +198,7 @@ let g:tagbar_sort = 0
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "vim-clang
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:clang_auto = 1
+let g:clang_auto = 0
 let g:clang_c_options = '-std=gnu11'
 let g:clang_c_completeopt = 'longest,menuone,preview'
 let g:clang_cpp_options = '-std=c++11 -stdlib=libc++'
@@ -207,6 +211,7 @@ set noshowmode shortmess+=c
 set completeopt-=preview
 set completeopt+=longest,menuone,noinsert,noselect
 let g:mucomplete#enable_auto_at_startup = 0
+let g:mucomplete#always_use_completeopt = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "ultisnips
@@ -245,7 +250,7 @@ endif
 "gen_tags
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Map <Ctrl>+<F12> to generate tags
-nnoremap <C-F12> :GenGTAGS<CR>
+nnoremap <C-F12> :GenCtags<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "markdown
@@ -260,16 +265,19 @@ nmap <leader>m :!markdown % \| w3m -T text/html<CR><CR>
 "Map movement through errors with wrapping.
 nmap <silent> <C-h> <Plug>(ale_previous_wrap)
 nmap <silent> <C-l> <Plug>(ale_next_wrap)
-let g:ale_c_clang_options='-std=gnu11 -Wall'
+let g:ale_echo_msg_format = '[%linter%] %code: %%s'
+let g:ale_lint_on_text_changed = 'normal'
+let g:ale_lint_on_insert_leave = 1
+
 let g:ale_c_gcc_options='-std=gnu11 -Wall'
-let g:ale_cpp_clang_options='-std=gnu++14 -Wall'
 let g:ale_cpp_gcc_options='-std=gnu++14 -Wall'
 let g:ale_sh_shellcheck_options='-x'
 let g:ale_sh_shellcheck_exclusions='SC2086,SC2181,SC2006,SC2039,SC2162'
-let g:ale_c_cppcheck_options='--enable=style --suppress=variableScope'
-let g:ale_cpp_cppcheck_options='--enable=style --suppress=variableScope'
+let g:ale_c_cppcheck_options='--enable=style --suppress=nullPointerRedundantCheck --suppress=variableScope --suppress=redundantAssignment'
+let g:ale_cpp_cppcheck_options='--enable=style --suppress=nullPointerRedundantCheck --suppress=variableScope --suppress=redundantAssignment'
 let g:ale_linters = {
-            \ 'cpp': ['cppcheck', 'clang'],
+            \ 'cpp': ['g++', 'cppcheck'],
+            \ 'c': ['gcc', 'cppcheck'],
             \ 'go': ['gometalinter', 'gofmt'],
             \ }
 let b:ale_go_gometalinter_options='--fast --min-confidence=.81'
@@ -322,3 +330,11 @@ map <leader>cd :cd %:p:h<cr>:pwd<cr>
 "vim-go
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 au FileType go nmap <leader>r <Plug>(go-run)
+au FileType go nmap <leader>t <Plug>(go-test)
+au FileType go nmap <Leader>d <Plug>(go-def-split)
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"indentline
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"autocmd Filetype json let g:indentLine_enabled = 0
+let g:indentLine_fileTypeExclude = ['json', 'man']
