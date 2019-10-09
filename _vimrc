@@ -21,7 +21,6 @@ Plug 'buoto/gotests-vim'                "Generate table driven tests easily
 
 Plug 'editorconfig/editorconfig-vim'    "EditorConfig
 Plug 'w0rp/ale'                         "Lint(Syntax checking)
-"Plug 'vim-syntastic/syntastic'
 Plug 'embear/vim-foldsearch'            "Fold away lines that don't match a search pattern
 Plug 'gko/vim-coloresque'               "CSS/LESS/SASS/HTML color preview
 Plug 'yggdroot/indentline'              "Display indention levels
@@ -109,6 +108,8 @@ set linebreak           "Wrap long lines at a blank
 set noerrorbells        "No beep on errors
 set wildignore=*.o,*~
 
+set title
+
 "Set command-line completion operates in enhanced mode
 set wildmode=list:full
 set wildmenu
@@ -127,7 +128,7 @@ set laststatus=2            "Always show the status line
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Leader key
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:mapleader = ","
+let g:mapleader = "."
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "TAB
@@ -256,8 +257,8 @@ nnoremap <C-F12> :GenCtags<CR>
 "markdown
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "preview
-"nmap <leader>m :!markdown % \| lynx -stdin <CR><CR>
-nmap <leader>m :!markdown % \| w3m -T text/html<CR><CR>
+nmap <leader>m :!markdown % \| lynx -stdin <CR><CR>
+"nmap <leader>m :!markdown % \| w3m -T text/html<CR><CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "ALE
@@ -266,8 +267,8 @@ nmap <leader>m :!markdown % \| w3m -T text/html<CR><CR>
 nmap <silent> <C-h> <Plug>(ale_previous_wrap)
 nmap <silent> <C-l> <Plug>(ale_next_wrap)
 let g:ale_echo_msg_format = '[%linter%] %code: %%s'
-let g:ale_lint_on_text_changed = 'normal'
-let g:ale_lint_on_insert_leave = 1
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_insert_leave = 0
 
 let g:ale_c_gcc_options='-std=gnu11 -Wall'
 let g:ale_cpp_gcc_options='-std=gnu++14 -Wall'
@@ -280,7 +281,7 @@ let g:ale_linters = {
             \ 'c': ['gcc', 'cppcheck'],
             \ 'go': ['gometalinter', 'gofmt'],
             \ }
-let b:ale_go_gometalinter_options='--fast --min-confidence=.81'
+let b:ale_go_gometalinter_options='--fast --min-confidence=.81 --disable=gosec'
 
 function! LinterStatus() abort
     let l:counts = ale#statusline#Count(bufnr(''))
@@ -292,21 +293,6 @@ function! LinterStatus() abort
     \)
 endfunction
 set statusline+=[%{LinterStatus()}]
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"Syntastic
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 2
-"let g:syntastic_check_on_open = 1
-"let g:syntastic_check_on_wq = 0
-"let g:syntastic_sh_shellcheck_args='-x -e SC2086,SC2181,SC2006,SC2039,SC2162'
-"let g:syntastic_c_cppcheck_args='--enable=style --suppress=variableScope'
-"let g:syntastic_cpp_cppcheck_args='--enable=style --suppress=variableScope'
-"let g:syntastic_go_gometalinter_args='--fast --min-confidence=.81'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "editorconfig
@@ -337,4 +323,4 @@ au FileType go nmap <Leader>d <Plug>(go-def-split)
 "indentline
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "autocmd Filetype json let g:indentLine_enabled = 0
-let g:indentLine_fileTypeExclude = ['json', 'man']
+let g:indentLine_fileTypeExclude = ['json', 'man', 'markdown']
