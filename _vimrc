@@ -2,8 +2,16 @@
 set nocompatible
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"Vundle
+"Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"Plugin manager
+if empty(glob('~/.vim/autoload/plug.vim'))
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall | source $MYVIMRC
+endif
+
 if !has("compatible")
 "filetype off
 "Specify a directory for plugins
@@ -16,7 +24,7 @@ Plug 'honza/vim-snippets'               "Code snippet
 Plug 'jsfaint/gen_tags.vim'             "Generate and load tags
 Plug 'majutsushi/tagbar'                "Browse the tags
 "Plug 'Raimondi/delimitMate'            "Auto closing of parenthesis, brackets, ...
-Plug 'fatih/vim-go'                     "Golang support
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }  "Golang support
 Plug 'buoto/gotests-vim'                "Generate table driven tests easily
 
 Plug 'editorconfig/editorconfig-vim'    "EditorConfig
